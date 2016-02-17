@@ -3,6 +3,11 @@ package fantasy
 
 import "encoding/xml"
 
+const (
+	// BaseUrl is the root yahoo fantasy api url.
+	baseUrl = "https://fantasysports.yahooapis.com/fantasy/v2/"
+)
+
 // Parser is the main struct for unmarshaling xml from http.client.Get requests.
 type Parser struct {
 	// XMLName fantasy_content is the main wrapper tag in a Yahoo api response.
