@@ -7,18 +7,19 @@ import (
 
 const guid = "JT4FACLQZI2OCE"
 
-func TestNewUser(t *testing.T) {
+func TestActiveUser(t *testing.T) {
 	client := gotest.NewRegisteredClient()
+	url := UserQueryBuilder{ActiveUser: true}.Url()
 
 	// test bad client request
-	_, err := NewUser(client.Client)
+	_, err := ActiveUser(client.Client)
 	if err == nil {
 		t.Error("Expected NewUser to return an error")
 	}
 
 	// test non-xml response
-	client.Register(userUrl, "get", gotest.NewSimpleRoundTrip([]byte("Hello, world"), nil))
-	_, err = NewUser(client.Client)
+	client.Register(url, "get", gotest.NewSimpleRoundTrip([]byte("Hello, world"), nil))
+	_, err = ActiveUser(client.Client)
 	if err == nil {
 		t.Error("Expected NewUser to return an error")
 	}
@@ -34,9 +35,9 @@ func TestNewUser(t *testing.T) {
 		</fantasy_content>`)
 	headers := make(map[string]string)
 	headers["Content-Type"] = "text/xml"
-	client.Register(userUrl, "get", gotest.NewSimpleRoundTrip(xml, headers))
+	client.Register(url, "get", gotest.NewSimpleRoundTrip(xml, headers))
 
-	user, err := NewUser(client.Client)
+	user, err := ActiveUser(client.Client)
 	if err != nil {
 		t.Errorf("NewUser returned an error %v", err)
 	}
@@ -57,8 +58,8 @@ func TestNewUser(t *testing.T) {
 		  </user>
 		 </users>
 		</fantasy_content>`)
-	client.Register(userUrl, "get", gotest.NewSimpleRoundTrip(xml, headers))
-	_, err = NewUser(client.Client)
+	client.Register(url, "get", gotest.NewSimpleRoundTrip(xml, headers))
+	_, err = ActiveUser(client.Client)
 	if err == nil {
 		t.Error("Expected NewUser to return an error")
 	}
