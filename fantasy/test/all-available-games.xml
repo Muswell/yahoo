@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fantasy_content xml:lang="en-US" yahoo:uri="http://fantasysports.yahooapis.com/fantasy/v2/games;is_available=1" time="66.186904907227ms" copyright="Data provided by Yahoo! and STATS, LLC" refresh_rate="31" xmlns:yahoo="http://www.yahooapis.com/v1/base.rng" xmlns="http://fantasysports.yahooapis.com/fantasy/v2/base.rng">
+ <games count="5">
+  <game>
+   <game_key>348</game_key>
+   <game_id>348</game_id>
+   <name>Football</name>
+   <code>nfl</code>
+   <type>full</type>
+   <url>https://football.fantasysports.yahoo.com/f1</url>
+   <season>2015</season>
+   <is_registration_over>1</is_registration_over>
+  </game>
+  <game>
+   <game_key>352</game_key>
+   <game_id>352</game_id>
+   <name>Hockey</name>
+   <code>nhl</code>
+   <type>full</type>
+   <url>https://hockey.fantasysports.yahoo.com/hockey</url>
+   <season>2015</season>
+   <is_registration_over>1</is_registration_over>
+  </game>
+  <game>
+   <game_key>353</game_key>
+   <game_id>353</game_id>
+   <name>Basketball</name>
+   <code>nba</code>
+   <type>full</type>
+   <url>https://basketball.fantasysports.yahoo.com/nba</url>
+   <season>2015</season>
+   <is_registration_over>1</is_registration_over>
+  </game>
+  <game>
+   <game_key>356</game_key>
+   <game_id>356</game_id>
+   <name>Tourney Pick'em</name>
+   <code>yahoops</code>
+   <type>pickem-team-list</type>
+   <url>https://tournament.fantasysports.yahoo.com/t1</url>
+   <season>2016</season>
+   <is_registration_over>0</is_registration_over>
+   <editorial_season>2015</editorial_season>
+   <picks_status>preedit</picks_status>
+   <contest_group_id>26</contest_group_id>
+  </game>
+  <game>
+   <game_key>357</game_key>
+   <game_id>357</game_id>
+   <name>Baseball</name>
+   <code>mlb</code>
+   <type>full</type>
+   <url>https://baseball.fantasysports.yahoo.com/b1</url>
+   <season>2016</season>
+   <is_registration_over>0</is_registration_over>
+  </game>
+ </games>
+</fantasy_content>

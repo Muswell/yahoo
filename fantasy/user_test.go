@@ -14,14 +14,14 @@ func TestActiveUser(t *testing.T) {
 	// test bad client request
 	_, err := ActiveUser(client.Client)
 	if err == nil {
-		t.Error("Expected NewUser to return an error")
+		t.Error("Expected ActiveUser to return an error")
 	}
 
 	// test non-xml response
 	client.Register(url, "get", gotest.NewSimpleRoundTrip([]byte("Hello, world"), nil))
 	_, err = ActiveUser(client.Client)
 	if err == nil {
-		t.Error("Expected NewUser to return an error")
+		t.Error("Expected ActiveUser to return an error")
 	}
 
 	// test well formatted xml response
@@ -39,11 +39,11 @@ func TestActiveUser(t *testing.T) {
 
 	user, err := ActiveUser(client.Client)
 	if err != nil {
-		t.Errorf("NewUser returned an error %v", err)
+		t.Errorf("ActiveUser returned an error %v", err)
 	}
 
 	if user.Guid != guid {
-		t.Errorf("NewUser returned incorrect user Guid was %s expected %s", user.Guid, guid)
+		t.Errorf("ActiveUser returned incorrect user Guid was %s expected %s", user.Guid, guid)
 	}
 
 	// test incorrect xml
@@ -61,6 +61,6 @@ func TestActiveUser(t *testing.T) {
 	client.Register(url, "get", gotest.NewSimpleRoundTrip(xml, headers))
 	_, err = ActiveUser(client.Client)
 	if err == nil {
-		t.Error("Expected NewUser to return an error")
+		t.Error("Expected ActiveUser to return an error")
 	}
 }

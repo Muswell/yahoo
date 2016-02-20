@@ -1,15 +1,15 @@
 package fantasy
 
 import (
-	"fmt"
-	"log"
-	"strings"
+/*"fmt"
+"log"
+"strings"*/
 )
 
 // FormatAsBool is a helper type that handles the inconsistent bool formatting in the json returned from Yahoo!
 type formatAsBool bool
 
-func (b *formatAsBool) UnmarshalJSON(data []byte) error {
+/*func (b *formatAsBool) UnmarshalJSON(data []byte) error {
 	s := strings.Trim(string(data), `"`)
 
 	if s == "1" || s == "true" {
@@ -21,4 +21,4 @@ func (b *formatAsBool) UnmarshalJSON(data []byte) error {
 		return fmt.Errorf("Boolean unmarshal error: invalid input %s", s)
 	}
 	return nil
-}
+}*/

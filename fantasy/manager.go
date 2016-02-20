@@ -14,5 +14,5 @@ type Manager struct {
 	// ImageURL is the address of the manager's avatar
 	ImageURL string `json:"image_url"`
 	// IsCurrentLogin is a bool value indicating if this manager is the logged in user
-	IsCurrentLogin formatAsBool `json:"is_current_login"`
+	ActiveUser formatAsBool `json:"is_current_login"`
 }

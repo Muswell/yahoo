@@ -14,4 +14,6 @@ type Parser struct {
 	XMLName xml.Name `xml:"fantasy_content"`
 	// Users is where a user(s) request stores its results.
 	Users []User `xml:"users>user"`
+	// Games is where a GameBuilderQuery stores its results.
+	Games []Game `xml:"games>game"`
 }

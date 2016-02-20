@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fantasy_content xml:lang="en-US" yahoo:uri="http://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games" time="33.735036849976ms" copyright="Data provided by Yahoo! and STATS, LLC" refresh_rate="31" xmlns:yahoo="http://www.yahooapis.com/v1/base.rng" xmlns="http://fantasysports.yahooapis.com/fantasy/v2/base.rng">
+ <users count="1">
+  <user>
+   <guid>O2SHX5XDFLVBJ5VPJP7UJOYKYE</guid>
+   <games count="1">
+    <game>
+     <game_key>357</game_key>
+     <game_id>357</game_id>
+     <name>Baseball</name>
+     <code>mlb</code>
+     <type>full</type>
+     <url>https://baseball.fantasysports.yahoo.com/b1</url>
+     <season>2016</season>
+     <is_registration_over>0</is_registration_over>
+    </game>
+   </games>
+  </user>
+ </users>
+</fantasy_content>
