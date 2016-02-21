@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
 // Game represents a Yahoo Fantasy Sport.
@@ -34,23 +35,26 @@ type GameQueryBuilder struct {
 	Available bool
 }
 
-// Url generates the url needed for a request of the query builder's settings.
-func (q *GameQueryBuilder) Url() string {
-	url := baseUrl
+//Path returns the yahoo api path for the query excluding the host and query string.
+func (q *GameQueryBuilder) Path() string {
+	var path string
 	if q.ActiveUser {
-		url += "/users;use_login=1"
+		path += "/users;use_login=1"
 	}
 
-	url += "/games"
+	path += "/games"
 	if q.Available {
-		url += ";is_available=1"
+		path += ";is_available=1"
 	}
-	url += "?format=xml"
-
-	return url
+	return strings.TrimLeft(path, "/")
 }
 
-// XmlParser must be able to parse a byte slice of xml data and return a slice of Games.
+// Url generates the url needed for a request of the query builder's settings.
+func (q *GameQueryBuilder) Url() string {
+	return baseUrl + q.Path() + "?format=xml"
+}
+
+// XmlGameParser must be able to parse a byte slice of xml data and return a slice of Games.
 type xmlGameParser interface {
 	parseXML([]byte) ([]Game, error)
 }
