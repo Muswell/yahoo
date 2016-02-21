@@ -22,6 +22,8 @@ type Game struct {
 	URL string `xml:"url"`
 	// Season is a 4 digit year in which the season is played.
 	Season int64 `xml:"season"`
+	//IsRegistrationOver determines if the game is still accepting new signups.
+	IsRegistrationOver intAsBool `xml:"is_registration_over"`
 }
 
 //GameQueryBuilder contains properties which are used to generate yahoo api game requests.

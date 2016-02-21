@@ -6,13 +6,13 @@ type Manager struct {
 	// Guid is the unique ID of the user
 	Guid string
 	// ManagerID is the id of the manager within the League.
-	ManagerID string `json:"manager_id"`
+	ManagerID string `xml:"manager_id"`
 	// Name is the nickname the manager is using within the League.
-	Name string `json:"nickname"`
+	Name string `xml:"nickname"`
 	// Email is the email address the manager is using within the League.
 	Email string
 	// ImageURL is the address of the manager's avatar
-	ImageURL string `json:"image_url"`
+	ImageURL string `xml:"image_url"`
 	// IsCurrentLogin is a bool value indicating if this manager is the logged in user
-	ActiveUser formatAsBool `json:"is_current_login"`
+	IsActiveUser intAsBool `xml:"is_current_login"`
 }

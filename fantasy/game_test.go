@@ -80,6 +80,18 @@ func TestGetAllAvailableGames(t *testing.T) {
 	}
 
 	//todo test values of Game
+	game := games[0]
+
+	if game.Code != "nfl" {
+		t.Errorf("Incorrect Game Code got %s, expected %s", game.Code, "nfl")
+	}
+	if game.ID != 348 {
+		t.Errorf("Incorrect Game ID got %d, expected %d", game.ID, 348)
+	}
+
+	if !game.IsRegistrationOver {
+		t.Errorf("Game registration was expected to be over %s.", game.IsRegistrationOver)
+	}
 }
 
 func TestGetUserGames(t *testing.T) {
