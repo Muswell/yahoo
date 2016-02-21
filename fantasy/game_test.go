@@ -78,6 +78,8 @@ func TestGetAllAvailableGames(t *testing.T) {
 	if len(games) != 5 {
 		t.Errorf("GameQueryBuilder.Get returned %d games expected %d", len(games), 5)
 	}
+
+	//todo test values of Game
 }
 
 func TestGetUserGames(t *testing.T) {
