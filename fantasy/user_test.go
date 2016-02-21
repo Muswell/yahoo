@@ -28,14 +28,15 @@ func TestActiveUser(t *testing.T) {
 	}
 
 	// test well formatted xml response
-	xml := []byte(`<?xml version="1.0" encoding="UTF-8"?>
-		<fantasy_content xml:lang="en-US" yahoo:uri="http://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/" time="23.27299118042ms" copyright="Data provided by Yahoo! and STATS, LLC" refresh_rate="31" xmlns:yahoo="http://www.yahooapis.com/v1/base.rng" xmlns="http://fantasysports.yahooapis.com/fantasy/v2/base.rng">
-		 <users count="1">
-		  <user>
-		   <guid>` + guid + `</guid>
-		  </user>
-		 </users>
-		</fantasy_content>`)
+	file, err := os.Open("test/active-user.xml")
+	if err != nil {
+		t.Error("Could not open test/active-user.xml")
+	}
+	xml, err := ioutil.ReadAll(file)
+	if err != nil {
+		t.Error("Could not read test/active-user.xml")
+	}
+
 	headers := make(map[string]string)
 	headers["Content-Type"] = "text/xml"
 	client.Register(url, "get", gotest.NewSimpleRoundTrip(xml, headers))
@@ -109,5 +110,9 @@ func TestGetUserWithGames(t *testing.T) {
 
 	if len(user.Games) != 1 {
 		t.Errorf("Incorrect User.Games length got %d, expected %d", len(user.Games), 1)
+	}
+
+	if user.Games[0].Code != "mlb" {
+		t.Errorf("User Game Code unmarshalled incorectly got %s, expected %s", user.Games[0].Code, "mlb")
 	}
 }
