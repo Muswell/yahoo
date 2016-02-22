@@ -1,11 +1,11 @@
-# yahoo
+# Yahoo
 Go package for consuming Yahoo! fantasy sports API.
 
 The top level package contains one small Go file auth.go
-This provides a pre-configured *golang.org/x/oauth2.Config for Yahoo! connections.
+This provides a pre-configured golang.org/x/oauth2.Config for Yahoo! connections.
 Dependent on golang.org/x/oauth2 package
 
- **NewConfig** creates a ready to use Auth instance. if the redirectUrl is empty,
+ **NewConfig** creates a ready to use oauth2.Config instance. if the redirectUrl is empty,
  this is assumed to be an installed application.
  
 `func NewConfig(clientId, clientSecret, redirectUrl string) *oauth2.Config`

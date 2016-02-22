@@ -14,15 +14,15 @@ func TestGameQueryBuilderURL(t *testing.T) {
 	}{
 		{
 			GameQueryBuilder{Available: true},
-			baseUrl + "games;is_available=1?format=xml",
+			BaseUrl + "games;is_available=1?format=xml",
 		},
 		{
 			GameQueryBuilder{ActiveUser: true},
-			baseUrl + "users;use_login=1/games?format=xml",
+			BaseUrl + "users;use_login=1/games?format=xml",
 		},
 		{
 			GameQueryBuilder{Available: true, ActiveUser: true},
-			baseUrl + "users;use_login=1/games;is_available=1?format=xml",
+			BaseUrl + "users;use_login=1/games;is_available=1?format=xml",
 		},
 	}
 

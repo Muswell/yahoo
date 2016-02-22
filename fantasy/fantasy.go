@@ -3,5 +3,5 @@ package fantasy
 
 const (
 	// BaseUrl is the root yahoo fantasy api url.
-	baseUrl = "https://fantasysports.yahooapis.com/fantasy/v2/"
+	BaseUrl = "https://fantasysports.yahooapis.com/fantasy/v2/"
 )

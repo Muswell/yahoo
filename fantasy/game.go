@@ -51,7 +51,7 @@ func (q *GameQueryBuilder) Path() string {
 
 // Url generates the url needed for a request of the query builder's settings.
 func (q *GameQueryBuilder) Url() string {
-	return baseUrl + q.Path() + "?format=xml"
+	return BaseUrl + q.Path() + "?format=xml"
 }
 
 // XmlGameParser must be able to parse a byte slice of xml data and return a slice of Games.
@@ -102,8 +102,8 @@ func (p userXMLGameParser) parseXML(data []byte) ([]Game, error) {
 }
 
 // XmlParser returns the appropriate xml parser based on the query builder settings.
-func (qb *GameQueryBuilder) xmlParser() xmlGameParser {
-	if qb.ActiveUser {
+func (q *GameQueryBuilder) xmlParser() xmlGameParser {
+	if q.ActiveUser {
 		return new(userXMLGameParser)
 	}
 	return new(defaultXMLGameParser)
@@ -111,8 +111,8 @@ func (qb *GameQueryBuilder) xmlParser() xmlGameParser {
 
 // Get sends a request to the appropriate url based on the query builder settings.
 // It then sends that response to a parser and returns the resulting Game slice.
-func (qb *GameQueryBuilder) Get(client *http.Client) ([]Game, error) {
-	url := qb.Url()
+func (q *GameQueryBuilder) Get(client *http.Client) ([]Game, error) {
+	url := q.Url()
 
 	resp, err := client.Get(url)
 	if err != nil {
@@ -125,5 +125,5 @@ func (qb *GameQueryBuilder) Get(client *http.Client) ([]Game, error) {
 		return []Game{}, err
 	}
 
-	return qb.xmlParser().parseXML(data)
+	return q.xmlParser().parseXML(data)
 }

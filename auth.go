@@ -10,7 +10,7 @@ const (
 	TokenURL = "https://api.login.yahoo.com/oauth2/get_token"
 )
 
-// New creates a ready to use Auth instance.
+// NewConfig creates a ready to use Auth instance.
 // if the redirectUrl is empty, this is assumed to be an installed application.
 func NewConfig(clientId, clientSecret, redirectUrl string) *oauth2.Config {
 	if redirectUrl == "" {

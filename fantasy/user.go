@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"regexp"
+	"strings"
 )
 
 // User type represents a single Yahoo fantasy user
@@ -30,16 +32,15 @@ func (q *UserQueryBuilder) Path() string {
 	}
 
 	if q.GameQB != nil {
-		// todo strip out any redundant user path.
-		path += "/" + q.GameQB.Path()
-
+		r := regexp.MustCompile("/?users(?:;use_login=1)?")
+		path += "/" + strings.TrimLeft(r.ReplaceAllString(q.GameQB.Path(), ""), "/")
 	}
-	return path
+	return strings.TrimLeft(path, "/")
 }
 
 // Url returns the api url that the query builder fields create.
 func (q *UserQueryBuilder) Url() string {
-	return baseUrl + q.Path() + "?format=xml"
+	return BaseUrl + q.Path() + "?format=xml"
 }
 
 // XmlUserParser must be able to parse a byte slice of xml data and return a slice of Users.
