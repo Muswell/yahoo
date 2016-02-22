@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
-	"time"
 )
 
 // League contains the metadata for a Yahoo fantasy league as well as pointers to related information.
@@ -40,9 +39,9 @@ type League struct {
 	// Public or private.
 	LeagueType string `xml:"league_type"`
 	// The beginning date of the season
-	StartDate time.Time `xml:"start_date"`
+	StartDate fantasy.CalendarDate `xml:"start_date"`
 	// The end date of the season
-	EndDate time.Time `xml:"end_date"`
+	EndDate fantasy.CalendarDate `xml:"end_date"`
 	//The code of the associated game type.
 	GameCode string `xml:"game_code"`
 	// 4 digit year
