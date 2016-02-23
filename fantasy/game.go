@@ -24,7 +24,7 @@ type Game struct {
 	// Season is a 4 digit year in which the season is played.
 	Season int64 `xml:"season"`
 	//IsRegistrationOver determines if the game is still accepting new signups.
-	IsRegistrationOver IntAsBool `xml:"is_registration_over"`
+	IsRegistrationOver intAsBool `xml:"is_registration_over"`
 }
 
 //GameQueryBuilder contains properties which are used to generate yahoo api game requests.
@@ -51,7 +51,7 @@ func (q *GameQueryBuilder) Path() string {
 
 // Url generates the url needed for a request of the query builder's settings.
 func (q *GameQueryBuilder) Url() string {
-	return BaseUrl + q.Path() + "?format=xml"
+	return baseUrl + q.Path() + "?format=xml"
 }
 
 // XmlGameParser must be able to parse a byte slice of xml data and return a slice of Games.

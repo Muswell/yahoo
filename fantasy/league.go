@@ -95,7 +95,7 @@ func (q *LeagueQueryBuilder) Path() string {
 
 // Url generates the url needed for a request of the query builder's settings.
 func (q *LeagueQueryBuilder) Url() string {
-	return BaseUrl + q.Path() + "?format=xml"
+	return baseUrl + q.Path() + "?format=xml"
 }
 
 // XmlLeagueParser must be able to parse a byte slice of xml data and return a slice of Leagues.

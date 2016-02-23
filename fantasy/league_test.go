@@ -15,11 +15,11 @@ func TestLeagueQueryBuilderURL(t *testing.T) {
 	}{
 		{
 			LeagueQueryBuilder{UserQB: &UserQueryBuilder{ActiveUser: true}},
-			BaseUrl + "users;use_login=1/games/leagues?format=xml",
+			baseUrl + "users;use_login=1/games/leagues?format=xml",
 		},
 		{
 			LeagueQueryBuilder{Keys: []string{"357.l.37903", "357.l.37825"}},
-			BaseUrl + "leagues;league_keys=357.l.37903,357.l.37825?format=xml",
+			baseUrl + "leagues;league_keys=357.l.37903,357.l.37825?format=xml",
 		},
 		{
 			LeagueQueryBuilder{
@@ -30,7 +30,7 @@ func TestLeagueQueryBuilderURL(t *testing.T) {
 					},
 				},
 			},
-			BaseUrl + "users;use_login=1/games;is_available=1/leagues?format=xml",
+			baseUrl + "users;use_login=1/games;is_available=1/leagues?format=xml",
 		},
 		{
 			LeagueQueryBuilder{
@@ -42,7 +42,7 @@ func TestLeagueQueryBuilderURL(t *testing.T) {
 				},
 				Keys: []string{"357.l.37903"},
 			},
-			BaseUrl + "users;use_login=1/games;is_available=1/leagues;league_keys=357.l.37903?format=xml",
+			baseUrl + "users;use_login=1/games;is_available=1/leagues;league_keys=357.l.37903?format=xml",
 		},
 	}
 

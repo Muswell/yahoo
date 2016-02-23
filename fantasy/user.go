@@ -40,7 +40,7 @@ func (q *UserQueryBuilder) Path() string {
 
 // Url returns the api url that the query builder fields create.
 func (q *UserQueryBuilder) Url() string {
-	return BaseUrl + q.Path() + "?format=xml"
+	return baseUrl + q.Path() + "?format=xml"
 }
 
 // XmlUserParser must be able to parse a byte slice of xml data and return a slice of Users.

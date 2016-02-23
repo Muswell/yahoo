@@ -11,20 +11,20 @@ import (
 
 // IntAsBool reads integer xml node values and converts them to true or false,
 // 0 = false, 1 = true, everything else errors.
-type IntAsBool bool
+type intAsBool bool
 
 // UnmarshalXML takes an xml element, reads its content as an int64 and converts that to a bool.
-func (b *IntAsBool) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+func (b *intAsBool) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 	var i int64
 	d.DecodeElement(&i, &start)
 
 	if i == 0 {
-		*b = IntAsBool(false)
+		*b = intAsBool(false)
 		return nil
 	}
 
 	if i == 1 {
-		*b = IntAsBool(true)
+		*b = intAsBool(true)
 		return nil
 	}
 	return fmt.Errorf("Bad intAsBool value %d (0 = false 1, = true)", i)
