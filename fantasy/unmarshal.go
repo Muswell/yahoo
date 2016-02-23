@@ -30,9 +30,9 @@ func (b *IntAsBool) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 	return fmt.Errorf("Bad intAsBool value %d (0 = false 1, = true)", i)
 }
 
-type CalendarDate time.Time
+type calendarDate time.Time
 
-func (c *CalendarDate) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+func (c *calendarDate) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 	const shortForm = "2006-01-02" // yyyy-mm-dd date format
 	var v string
 	d.DecodeElement(&v, &start)
@@ -40,6 +40,6 @@ func (c *CalendarDate) UnmarshalXML(d *xml.Decoder, start xml.StartElement) erro
 	if err != nil {
 		return err
 	}
-	*c = CalendarDate(parse)
+	*c = calendarDate(parse)
 	return nil
 }

@@ -30,7 +30,7 @@ type Game struct {
 //GameQueryBuilder contains properties which are used to generate yahoo api game requests.
 type GameQueryBuilder struct {
 	// ActiveUser set to true sets the query builder to get games only for the logged in user.
-	ActiveUser bool
+	UserQB *UserQueryBuilder
 	// Available sets the query builder to only return available games.
 	Available bool
 }
@@ -38,8 +38,8 @@ type GameQueryBuilder struct {
 //Path returns the yahoo api path for the query excluding the host and query string.
 func (q *GameQueryBuilder) Path() string {
 	var path string
-	if q.ActiveUser {
-		path += "/users;use_login=1"
+	if q.UserQB != nil {
+		path = q.UserQB.Path()
 	}
 
 	path += "/games"
@@ -103,7 +103,7 @@ func (p userXMLGameParser) parseXML(data []byte) ([]Game, error) {
 
 // XmlParser returns the appropriate xml parser based on the query builder settings.
 func (q *GameQueryBuilder) xmlParser() xmlGameParser {
-	if q.ActiveUser {
+	if q.UserQB != nil {
 		return new(userXMLGameParser)
 	}
 	return new(defaultXMLGameParser)

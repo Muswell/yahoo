@@ -1,9 +1,8 @@
 // League Contains Query Builders for Yahoo fantasy leagues
-package league
+package fantasy
 
 import (
 	"encoding/xml"
-	"github.com/muswell/yahoo/fantasy"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -39,9 +38,9 @@ type League struct {
 	// Public or private.
 	LeagueType string `xml:"league_type"`
 	// The beginning date of the season
-	StartDate fantasy.CalendarDate `xml:"start_date"`
+	StartDate calendarDate `xml:"start_date"`
 	// The end date of the season
-	EndDate fantasy.CalendarDate `xml:"end_date"`
+	EndDate calendarDate `xml:"end_date"`
 	//The code of the associated game type.
 	GameCode string `xml:"game_code"`
 	// 4 digit year
@@ -64,17 +63,17 @@ type League struct {
 	//*Transactions `xml:"transactions"`
 }
 
-//QueryBuilder contains properties which are used to generate yahoo api league requests.
-type QueryBuilder struct {
-	// Add a User QueryBuilder to filter results by user info.
-	UserQB *fantasy.UserQueryBuilder
+//LeagueQueryBuilder contains properties which are used to generate yahoo api league requests.
+type LeagueQueryBuilder struct {
+	// Add a UserQueryBuilder to filter results by user info.
+	UserQB *UserQueryBuilder
 	// Add League Keys to return specific leagues.
 	Keys []string
 	// todo include settings, standings...
 }
 
 //Path returns the yahoo api path for the query excluding the host and query string.
-func (q *QueryBuilder) Path() string {
+func (q *LeagueQueryBuilder) Path() string {
 	var path string
 
 	if q.UserQB != nil {
@@ -95,17 +94,17 @@ func (q *QueryBuilder) Path() string {
 }
 
 // Url generates the url needed for a request of the query builder's settings.
-func (q *QueryBuilder) Url() string {
-	return fantasy.BaseUrl + q.Path() + "?format=xml"
+func (q *LeagueQueryBuilder) Url() string {
+	return BaseUrl + q.Path() + "?format=xml"
 }
 
-// XmlParser must be able to parse a byte slice of xml data and return a slice of Leagues.
-type xmlParser interface {
+// XmlLeagueParser must be able to parse a byte slice of xml data and return a slice of Leagues.
+type xmlLeagueParser interface {
 	parseXML([]byte) ([]League, error)
 }
 
-// DefaultXMLParser parses xml with a leagues node as a direct child of the fantasy_content node.
-type defaultXMLParser struct {
+// DefaultXMLLeagueParser parses xml with a leagues node as a direct child of the fantasy_content node.
+type defaultXMLLeagueParser struct {
 	result struct {
 		// XMLName fantasy_content is the main wrapper tag in a Yahoo api response.
 		XMLName xml.Name `xml:"fantasy_content"`
@@ -115,7 +114,7 @@ type defaultXMLParser struct {
 }
 
 // ParseXML actually does the transformation from xml to League slice.
-func (p defaultXMLParser) parseXML(data []byte) ([]League, error) {
+func (p defaultXMLLeagueParser) parseXML(data []byte) ([]League, error) {
 	err := xml.Unmarshal(data, &p.result)
 	if err != nil {
 		return []League{}, err
@@ -123,8 +122,8 @@ func (p defaultXMLParser) parseXML(data []byte) ([]League, error) {
 	return p.result.Leagues, nil
 }
 
-//UserXMLGameParser parses xml with a structure fantasy_conent>users>user>games>game.
-type userXMLParser struct {
+//UserXMLLeagueParser parses xml with a structure fantasy_conent>users>user>games>game.
+type userXMLLeagueParser struct {
 	result struct {
 		// XMLName fantasy_content is the main wrapper tag in a Yahoo api response.
 		XMLName xml.Name `xml:"fantasy_content"`
@@ -135,7 +134,7 @@ type userXMLParser struct {
 
 // todo create generic function for parseXML.
 // ParseXML actually does the transformation from xml to League slice.
-func (p userXMLParser) parseXML(data []byte) ([]League, error) {
+func (p userXMLLeagueParser) parseXML(data []byte) ([]League, error) {
 	err := xml.Unmarshal(data, &p.result)
 
 	if err != nil {
@@ -146,16 +145,16 @@ func (p userXMLParser) parseXML(data []byte) ([]League, error) {
 }
 
 // XmlParser returns the appropriate xml parser based on the query builder settings.
-func (q *QueryBuilder) xmlParser() xmlParser {
+func (q *LeagueQueryBuilder) xmlParser() xmlLeagueParser {
 	if q.UserQB != nil {
-		return new(userXMLParser)
+		return new(userXMLLeagueParser)
 	}
-	return new(defaultXMLParser)
+	return new(defaultXMLLeagueParser)
 }
 
 // Get sends a request to the appropriate url based on the query builder settings.
 // It then sends that response to a parser and returns the resulting League slice.
-func (q *QueryBuilder) Get(client *http.Client) ([]League, error) {
+func (q *LeagueQueryBuilder) Get(client *http.Client) ([]League, error) {
 	url := q.Url()
 
 	resp, err := client.Get(url)

@@ -1,51 +1,48 @@
-package league
+package fantasy
 
 import (
 	"github.com/muswell/gotest"
-	"github.com/muswell/yahoo/fantasy"
 	"io/ioutil"
 	"os"
 	"testing"
 	"time"
 )
 
-func TestGameQueryBuilderURL(t *testing.T) {
+func TestLeagueQueryBuilderURL(t *testing.T) {
 	var tests = []struct {
-		input QueryBuilder
+		input LeagueQueryBuilder
 		want  string
 	}{
 		{
-			QueryBuilder{UserQB: &fantasy.UserQueryBuilder{ActiveUser: true}},
-			fantasy.BaseUrl + "users;use_login=1/games/leagues?format=xml",
+			LeagueQueryBuilder{UserQB: &UserQueryBuilder{ActiveUser: true}},
+			BaseUrl + "users;use_login=1/games/leagues?format=xml",
 		},
 		{
-			QueryBuilder{Keys: []string{"357.l.37903", "357.l.37825"}},
-			fantasy.BaseUrl + "leagues;league_keys=357.l.37903,357.l.37825?format=xml",
+			LeagueQueryBuilder{Keys: []string{"357.l.37903", "357.l.37825"}},
+			BaseUrl + "leagues;league_keys=357.l.37903,357.l.37825?format=xml",
 		},
 		{
-			QueryBuilder{
-				UserQB: &fantasy.UserQueryBuilder{
+			LeagueQueryBuilder{
+				UserQB: &UserQueryBuilder{
 					ActiveUser: true,
-					GameQB: &fantasy.GameQueryBuilder{
-						Available:  true,
-						ActiveUser: true,
+					GameQB: &GameQueryBuilder{
+						Available: true,
 					},
 				},
 			},
-			fantasy.BaseUrl + "users;use_login=1/games;is_available=1/leagues?format=xml",
+			BaseUrl + "users;use_login=1/games;is_available=1/leagues?format=xml",
 		},
 		{
-			QueryBuilder{
-				UserQB: &fantasy.UserQueryBuilder{
+			LeagueQueryBuilder{
+				UserQB: &UserQueryBuilder{
 					ActiveUser: true,
-					GameQB: &fantasy.GameQueryBuilder{
-						Available:  true,
-						ActiveUser: true,
+					GameQB: &GameQueryBuilder{
+						Available: true,
 					},
 				},
 				Keys: []string{"357.l.37903"},
 			},
-			fantasy.BaseUrl + "users;use_login=1/games;is_available=1/leagues;league_keys=357.l.37903?format=xml",
+			BaseUrl + "users;use_login=1/games;is_available=1/leagues;league_keys=357.l.37903?format=xml",
 		},
 	}
 
@@ -55,8 +52,8 @@ func TestGameQueryBuilderURL(t *testing.T) {
 		}
 	}
 }
-func TestQueryLeaugeErrors(t *testing.T) {
-	qb := QueryBuilder{Keys: []string{"abc"}}
+func TestQueryLeagueErrors(t *testing.T) {
+	qb := LeagueQueryBuilder{Keys: []string{"abc"}}
 	client := gotest.NewRegisteredClient()
 	url := qb.Url()
 
@@ -75,7 +72,7 @@ func TestQueryLeaugeErrors(t *testing.T) {
 }
 
 type queryTest struct {
-	qb     *QueryBuilder
+	qb     *LeagueQueryBuilder
 	client *gotest.RegisteredClient
 	want   int
 	next   func([]League, *testing.T)
@@ -104,7 +101,7 @@ func TestLeagueQueries(t *testing.T) {
 }
 
 func getSingleMetaTestSet(t *testing.T) queryTest {
-	q := QueryBuilder{Keys: []string{"357.l.86753"}}
+	q := LeagueQueryBuilder{Keys: []string{"357.l.86753"}}
 	url := q.Url()
 
 	return queryTest{
@@ -126,7 +123,7 @@ func getSingleMetaTestSet(t *testing.T) queryTest {
 }
 
 func getUserSingleMetaTestSet(t *testing.T) queryTest {
-	q := QueryBuilder{UserQB: &fantasy.UserQueryBuilder{ActiveUser: true}}
+	q := LeagueQueryBuilder{UserQB: &UserQueryBuilder{ActiveUser: true}}
 	url := q.Url()
 
 	return queryTest{

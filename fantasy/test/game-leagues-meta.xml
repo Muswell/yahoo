@@ -1,0 +1,41 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<fantasy_content xml:lang="en-US" yahoo:uri="http://fantasysports.yahooapis.com/fantasy/v2/games;game_keys=357/leagues;league_keys=357.l.37632" time="37.562131881714ms" copyright="Data provided by Yahoo! and STATS, LLC" refresh_rate="31" xmlns:yahoo="http://www.yahooapis.com/v1/base.rng" xmlns="http://fantasysports.yahooapis.com/fantasy/v2/base.rng">
+    <games count="1">
+        <game>
+            <game_key>357</game_key>
+            <game_id>357</game_id>
+            <name>Baseball</name>
+            <code>mlb</code>
+            <type>full</type>
+            <url>https://baseball.fantasysports.yahoo.com/b1</url>
+            <season>2016</season>
+            <is_registration_over>0</is_registration_over>
+            <leagues count="1">
+                <league>
+                    <league_key>357.l.37632</league_key>
+                    <league_id>37632</league_id>
+                    <name>Ashtray League Bochyball</name>
+                    <url>https://baseball.fantasysports.yahoo.com/b1/37632</url>
+                    <league_chat_id>oa448yc6i2n0do9bpxywmpu1cxmt7n7</league_chat_id>
+                    <draft_status>predraft</draft_status>
+                    <num_teams>10</num_teams>
+                    <edit_key>2016-02-22</edit_key>
+                    <weekly_deadline/>
+                    <league_update_timestamp></league_update_timestamp>
+                    <scoring_type>roto</scoring_type>
+                    <league_type>private</league_type>
+                    <renew/>
+                    <renewed/>
+                    <short_invitation_url>https://yho.com/mlb?l=37632&amp;ikey=f55d591b912311b5</short_invitation_url>
+                    <is_pro_league>0</is_pro_league>
+                    <is_cash_league>0</is_cash_league>
+                    <start_date>2016-04-03</start_date>
+                    <end_date>2016-10-02</end_date>
+                    <game_code>mlb</game_code>
+                    <season>2016</season>
+                </league>
+            </leagues>
+        </game>
+    </games>
+</fantasy_content>

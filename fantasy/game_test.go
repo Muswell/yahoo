@@ -17,11 +17,11 @@ func TestGameQueryBuilderURL(t *testing.T) {
 			BaseUrl + "games;is_available=1?format=xml",
 		},
 		{
-			GameQueryBuilder{ActiveUser: true},
+			GameQueryBuilder{UserQB: &UserQueryBuilder{ActiveUser: true}},
 			BaseUrl + "users;use_login=1/games?format=xml",
 		},
 		{
-			GameQueryBuilder{Available: true, ActiveUser: true},
+			GameQueryBuilder{Available: true, UserQB: &UserQueryBuilder{ActiveUser: true}},
 			BaseUrl + "users;use_login=1/games;is_available=1?format=xml",
 		},
 	}
@@ -95,7 +95,7 @@ func TestGetAllAvailableGames(t *testing.T) {
 }
 
 func TestGetUserGames(t *testing.T) {
-	qb := GameQueryBuilder{ActiveUser: true}
+	qb := GameQueryBuilder{UserQB: &UserQueryBuilder{ActiveUser: true}}
 	client := gotest.NewRegisteredClient()
 	url := qb.Url()
 
