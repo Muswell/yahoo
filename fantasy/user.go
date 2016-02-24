@@ -48,7 +48,7 @@ type xmlUserParser interface {
 	parseXML([]byte) ([]User, error)
 }
 
-// DefaultXMLUserParser parses xml with a games node as a direct child of the fantasy_content node.
+// DefaultXMLUserParser parses xml with a users node as a direct child of the fantasy_content node.
 type defaultXMLUserParser struct {
 	result struct {
 		// XMLName fantasy_content is the main wrapper tag in a Yahoo api response.
@@ -69,9 +69,6 @@ func (p defaultXMLUserParser) parseXML(data []byte) ([]User, error) {
 
 // XmlParser returns the appropriate xml parser based on the query builder settings.
 func (qb *UserQueryBuilder) xmlParser() xmlUserParser {
-	/*if qb.GameQB != nil {
-		return new(gameXMLUserParser)
-	}*/
 	return new(defaultXMLUserParser)
 }
 

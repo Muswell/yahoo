@@ -29,6 +29,7 @@ type Game struct {
 
 //GameQueryBuilder contains properties which are used to generate yahoo api game requests.
 type GameQueryBuilder struct {
+	// todo replace with league query builder
 	// ActiveUser set to true sets the query builder to get games only for the logged in user.
 	UserQB *UserQueryBuilder
 	// Available sets the query builder to only return available games.
